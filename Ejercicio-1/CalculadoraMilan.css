@@ -1,0 +1,86 @@
+/*(0,0,1)*/
+body{
+    background-color: whitesmoke;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*(0,0,1)*/
+form {
+    width: 100%;
+    max-width: 22em;
+    border-radius: 1em;
+    display: grid;
+    background-color: #d8bfd8;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    row-gap: 1em;
+    column-gap: 1em;
+    padding: 2em;
+}
+/*(0,1,2)*/
+form > input[type ="text"]{
+    width: 97%;
+    height: 4em;
+    grid-column: 1/6;
+}
+/*(0,0,2)*/
+form > label{
+    grid-column: 1/6;
+    width: 97%;
+}
+
+
+/*(0,1,2)*/
+form > input[type = "button"]{
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+    color: black;
+}
+/*(0,2,2)*/
+form > input[type = "submit"][value = "+"], 
+form > input[type = "submit"][value = "-"], 
+form > input[type = "submit"][value = "x"], 
+form > input[type = "submit"][value = "/"], 
+form > input[type = "submit"][value = "%"], 
+form > input[type = "submit"][value = "MRC"], 
+form > input[type = "submit"][value = "M-"], 
+form > input[type = "submit"][value = "M+"],  
+form > input[type = "submit"][value = "+/-"],  
+form > input[type = "submit"][value = "√"],  
+form > input[type = "submit"][value = "CE"], 
+form > input[type = "submit"][value = "C"]
+{
+    color: black;
+    background-color: aquamarine;
+}
+
+
+/*(0,2,2)*/
+form > input[type = "submit"][value = "1"], 
+form > input[type = "submit"][value = "2"], 
+form > input[type = "submit"][value = "3"], 
+form > input[type = "submit"][value = "4"], 
+form > input[type = "submit"][value = "5"], 
+form > input[type = "submit"][value = "6"], 
+form > input[type = "submit"][value = "7"], 
+form > input[type = "submit"][value = "8"],  
+form > input[type = "submit"][value = "9"],  
+form > input[type = "submit"][value = "0"],
+form > input[type = "submit"][value = "·"],  
+form > input[type = "submit"][value = "="]
+{
+    color: black;
+    background-color: #fdfd96;
+}
+/*(0,1,1)*/
+form :nth-child(21){
+    grid-row-start: 6;
+    grid-row-end: 8;
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
