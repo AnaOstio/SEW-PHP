@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <title>Calculadora Basica</title>
+    <title>Calculadora Cientifica</title>
     <meta name = "author" content="Ana Fernandez Ostio, UO275780" />
-    <meta name="description" content="Calculadora básica para SEW-JS" />
-    <meta name="keywords" content="calculadora,calculadora basica">
+    <meta name="description" content="Calculadora cientifica para SEW-JS" />
+    <meta name="keywords" content="calculadora,calculadora cientifica">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="CalculadoraCientifica.css" />
 </head>
@@ -437,9 +437,7 @@
                                 if($this->op1 === ''){
                                     $this->op1 = $this->pantalla;
                                     $res = $this->op1 . "**" . $this->contador;
-                                    echo "<script>console.log( 'Debug Objects: " . $res . "' );</script>"; 
-                                    echo "<script>console.log( 'Debug Objects: " . $this->op1  . "' );</script>"; 
-                                    echo "<script>console.log( 'Debug Objects: " . $this->contador . "' );</script>"; 
+                                    
                                     $total = eval("return $res ;");
                                     $this->pantalla = $total;
                                     $this->contador = $this->contador + 1;
@@ -505,284 +503,521 @@
 
         }
 
-        class CalculadoraCientifica extends Calculadora {
+    class CalculadoraCientifica extends Calculadora
+    {
 
-            //Atributos
-            protected $pantalla;
+        //Atributos
+        protected $pantalla;
 
-            protected $flecha;
+        protected $flecha;
 
-            protected $hyp;
+        protected $hyp;
 
-            protected $e;
+        protected $e;
 
-            protected $notacion;
+        protected $notacion;
 
-            protected $memoria;
+        protected $memoria;
 
-            // Hay que redefinir para los nombres de seno, cos, y tal
-            protected $seno;
-            protected $coseno;
-            protected $tangente;
-            protected $tipoGrado;
+        // Hay que redefinir para los nombres de seno, cos, y tal
+        public $seno;
+        public $coseno;
+        public $tangente;
+        public $tipoGrado;
 
-            protected $parentesis;
+        public $cambioGrado;
 
-            public function __construct(){
-                parent::__construct();
-                $this->pantalla = "";
-                $this->memoria = "";
-                $this->flecha = false;
-                $this->hyp = false;
-                $this->e = false;
-                $this->notacion = false;
-                $this->seno = "sin";
-                $this->coseno = "cos";
-                $this->tangente = "tan";
-                $this->tipoGrado = "DEG";
-                $this->parentesis = false;
-            }
+        protected $parentesis;
 
-            public function igual(){
-
-            }
-
-            public function punto(){
-                $this->pantalla .= ".";
-            }
-
-            public function mrc(){
-                
-            }
-
-            public function mMas(){
-                
-            }
-
-            public function mMenos(){
-                
-            }
-
-            public function botonMasMenos(){
-                
-            }
-
-            public function botonC(){
-                $this->pantalla = "0";
-                $this->memoria = "";
-                $this->flecha = false;
-                $this->hyp = false;
-                $this->e = false;
-                $this->notacion = false;
-                $this->seno = "sin";
-                $this->coseno = "cos";
-                $this->tangente = "tan";
-                $this->tipoGrado = "DEG";
-            }
-
-            public function botonCE(){
-                $this->pantalla = "0";
-            }
-
-            public function digitos($n){
-                if($this->pantalla === 0 || $this->pantalla === "0"){
-                    $this->pantalla = $n;
-                } else {
-                    $this->pantalla .= $n . "";
-                }
-            }
-
-            public function suma(){
-                $this->pantalla .= "+";
-            }
-
-            public function resta(){
-                $this->pantalla .= "-";
-            }
-
-            public function multiplicacion(){
-                $this->pantalla .= "*";
-            }
-
-            public function division(){
-                $this->pantalla .= "/";
-            }
-
-            public function botonRaizCuadrada(){
-                try {
-                    $expresion = "return " . $this->pantalla . ";";
-                    $total = eval($expresion);
-                    $res = sqrt($total);
-                    if (isset($res)){
-                        $this->pantalla= $res;
-                    }
-                } catch (Exception $th) {
-                    $this->pantalla = "ERROR";
-                }
-            }
-
-            public function botonPorcentaje(){
-                // Este se queda en blanco y ya que no hay   
-            }
-
-            public function limiparMem(){
-                
-            }
-
-            public function changeGrados($gradoTipo){
-                if($gradoTipo == "DEG"){
-                    $this->tipoGrado = "RAD";
-                }
-            }
-
-            public function chageHyp(){
-                
-            }
-
-            public function shift(){
-                
-            }
-
-            public function cambiarTipoPantalla(){
-                
-            }
-
-            public function seno($numero){
-                
-            }
-
-            public function coseno($numero){
-                
-            }
-
-            public function tangente($numero){
-                
-            }
-
-            public function toRad(){
-                
-            }
-
-            public function notacionC(){
-                
-            }
-
-            public function elevadoCuadrado(){
-                $this->pantalla .= "**2";
-            }
-
-            public function xElevadoY(){
-                $this->pantalla .= "**";
-            }
-
-            public function abrirParentesis(){
-                if ($this->pantalla === 0 || $this->pantalla === "0" || $this->pantalla === "Error" || $this->pantalla === "NaN") {
-                    $this->pantalla = "(";
-                } else {
-                    $this->pantalla .= "(";
-                }
-                $this->parentesis = true;
-            }
-
-            public function cerrarParentesis(){
-                if($this->parentesis){
-                    $this->pantalla .= ")";
-                }
-            }
+        public function __construct()
+        {
+            $this->cambioGrado = "DEG";
             
-            public function factorial(){
-                $this->pantalla = $this->factorialRec($this->pantalla);
-            }
+            $this->flecha = false;
+            $this->hyp = false;
+            parent::__construct();
+            $this->pantalla = "";
+            $this->memoria = "";
+            $this->e = false;
+            $this->notacion = false;
+            $this->seno = "sin";
+            $this->coseno = "cos";
+            $this->tangente = "tan";
+            $this->tipoGrado = "DEG";
+            $this->parentesis = false;
 
-            private function factorialRec($n){
-                if($n==0){
-                    return 1;   
-                }
-                return $n * $this->factorialRec($n-1);
-            }
-
-            public function btnPI(){
-                if($this->pantalla === 0 || $this->pantalla === "0"){
-                    $this->pantalla = pi();
-                } else {
-                    $this->pantalla .= pi() . "";
-                }
-            }
-
-            public function mod(){
-                $this->pantalla .= "%";
-            }
-
-            public function elevadoDiez(){
-                $this->pantalla .= "10**";
-            }
-
-            public function log(){
-
-                try {
-                    $total = eval("return $this->pantalla ; ");
-                    $res = log10($total);
-                    if (isset($res)){
-                        $this->pantalla= $res;
-                    }
-                } catch (Exception $th) {
-                    $this->pantalla = "ERROR";
-                }
-                
-            }
-
-            public function exp(){
-                $this->pantalla .= ",e+";
-            }
-
-            public function borrar(){
-                $this->pantalla .= "";
-                if(strlen($this->pantalla) > 0){
-                    $this->pantalla = substr($this->pantalla, 0, strlen($this->pantalla) - 1);
-                    if (strlen($this->pantalla) == 0) {
-                        $this->pantalla = "0";
-                    }
-                }
-            }
-
-            public function getCoseno(){
-                return $this->coseno;
-            }
-
-            public function getSeno(){
-                return $this->seno;
-            }
-
-            public function getTan(){
-                return $this->tangente;
-            }
-
-            public function getTipoGrado(){
-                return $this->tipoGrado;
-            }
-
-            public function limpiarMemoria(){
-                
-            }
-
-            public function saveMemoria(){
-                
-            }
-            
         }
+
+        public function igual()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                if (isset($total)) {
+                    $this->pantalla = $total;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function punto()
+        {
+            $this->pantalla .= ".";
+        }
+
+        public function mrc()
+        {
+            $this->pantalla = $this->memoria;
+        }
+
+        public function mMas()
+        {
+            $this->memoria = $this->pantalla + $this->memoria;
+            $this->pantalla = $this->memoria;
+        }
+
+        public function mMenos()
+        {
+            $this->memoria = $this->pantalla + $this->memoria;
+            $this->pantalla = $this->memoria;
+        }
+
+        public function botonMasMenos()
+        {
+            $enPantalla = $this->pantalla;
+            $cambio = $enPantalla . "*" . "-1";
+            $total = eval("return $cambio; ");
+            $this->pantalla = $total;
+        }
+
+        public function botonC()
+        {
+            $this->pantalla = "0";
+            $this->memoria = "";
+            $this->flecha = false;
+            $this->hyp = false;
+            $this->e = false;
+            $this->notacion = false;
+            $this->seno = "sin";
+            $this->coseno = "cos";
+            $this->tangente = "tan";
+            $this->tipoGrado = "DEG";
+        }
+
+        public function botonCE()
+        {
+            $this->pantalla = "0";
+        }
+
+        public function digitos($n)
+        {
+            if ($this->pantalla === 0 || $this->pantalla === "0") {
+                $this->pantalla = $n;
+            } else {
+                $this->pantalla .= $n . "";
+            }
+        }
+
+        public function suma()
+        {
+            $this->pantalla .= "+";
+        }
+
+        public function resta()
+        {
+            $this->pantalla .= "-";
+        }
+
+        public function multiplicacion()
+        {
+            $this->pantalla .= "*";
+        }
+
+        public function division()
+        {
+            $this->pantalla .= "/";
+        }
+
+        public function botonRaizCuadrada()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $res = sqrt($total);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function botonPorcentaje()
+        {
+            // Este se queda en blanco y ya que no hay   
+        }
+
+        public function chageHyp()
+        {
+            if ($this->hyp) {
+                $this->hyp = false;
+            } else {
+                $this->hyp = true;
+            }
+
+            $this->cambiarValores();
+        }
+
+        private function cambiarValores()
+        {
+            if ($this->hyp && $this->flecha) {
+                $this->seno = "asinh";
+                $this->coseno = "acosh";
+                $this->tangente = "atanh";
+            } elseif (!$this->hyp && $this->flecha) {
+                $this->seno = "asin";
+                $this->coseno = "acos";
+                $this->tangente = "atan";
+            } elseif ($this->hyp && !$this->flecha) {
+                $this->seno = "sinh";
+                $this->coseno = "cosh";
+                $this->tangente = "tanh";
+            } elseif (!$this->hyp && !$this->flecha) {
+                $this->seno = "sin";
+                $this->coseno = "cos";
+                $this->tangente = "tan";
+            }
+        }
+
+        public function shift()
+        {
+            if ($this->flecha) {
+                $this->flecha = false;
+            } else {
+                $this->flecha = true;
+            }
+
+            $this->cambiarValores();
+        }
+
+        public function seno()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                
+                $enRad = $this->toRad($total);
+                $res = sin($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function coseno()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = cos($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function tangente()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = tan($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function asin()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = asin($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function acos()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = acos($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function atan()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = atan($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function sinh()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = sinh($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function cosh()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = cosh($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function tanh()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = tanh($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function asinh()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = asinh($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function acosh()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = acosh($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        public function atanh()
+        {
+            try {
+                $expresion = "return " . $this->pantalla . ";";
+                $total = eval($expresion);
+                $enRad = $this->toRad($total);
+                $res = atanh($enRad);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+        }
+
+        private function toRad($valor)
+        {
+            if($this->cambioGrado === 'RAD'){
+                return $valor;
+            } elseif ($this->cambioGrado === 'GRAD'){
+                return $valor * (pi() / 200);
+            } elseif($this->cambioGrado === 'DEG'){
+                return $valor * (pi() / 180);
+            }
+        }
+
+        public function notacionC()
+        {
+            if(!$this->e){
+                $this->e = true;
+                $this->pantalla = exp($this->pantalla);
+            } 
+        }
+
+        public function elevadoCuadrado()
+        {
+            $this->pantalla .= "**2";
+        }
+
+        public function xElevadoY()
+        {
+            $this->pantalla .= "**";
+        }
+
+        public function abrirParentesis()
+        {
+            if ($this->pantalla === 0 || $this->pantalla === "0" || $this->pantalla === "Error" || $this->pantalla === "NaN") {
+                $this->pantalla = "(";
+            } else {
+                $this->pantalla .= "(";
+            }
+            $this->parentesis = true;
+        }
+
+        public function cerrarParentesis()
+        {
+            if ($this->parentesis) {
+                $this->pantalla .= ")";
+            }
+        }
+
+        public function factorial()
+        {
+            $this->pantalla = $this->factorialRec($this->pantalla);
+        }
+
+        private function factorialRec($n)
+        {
+            if ($n == 0) {
+                return 1;
+            }
+            return $n * $this->factorialRec($n - 1);
+        }
+
+        public function btnPI()
+        {
+            if ($this->pantalla === 0 || $this->pantalla === "0") {
+                $this->pantalla = pi();
+            } else {
+                $this->pantalla .= pi() . "";
+            }
+        }
+
+        public function mod()
+        {
+            $this->pantalla .= "%";
+        }
+
+        public function elevadoDiez()
+        {
+            $this->pantalla .= "10**";
+        }
+
+        public function log()
+        {
+
+            try {
+                $total = eval("return $this->pantalla ; ");
+                $res = log10($total);
+                if (isset($res)) {
+                    $this->pantalla = $res;
+                }
+            } catch (Exception $th) {
+                $this->pantalla = "ERROR";
+            }
+
+        }
+
+        public function exp()
+        {
+            $this->pantalla .= ",e+";
+        }
+
+        public function borrar()
+        {
+            $this->pantalla .= "";
+            if (strlen($this->pantalla) > 0) {
+                $this->pantalla = substr($this->pantalla, 0, strlen($this->pantalla) - 1);
+                if (strlen($this->pantalla) == 0) {
+                    $this->pantalla = "0";
+                }
+            }
+        }
+
+
+        public function limpiarMemoria()
+        {
+            $this->memoria = 0;
+        }
+
+        public function saveMemoria()
+        {
+            $this->memoria = $this->pantalla;
+        }
+
+        public function cambioDEG()
+        {
+            if ($this->cambioGrado == 'DEG') {
+                $this->cambioGrado = 'RAD';
+            } elseif ($this->cambioGrado == 'RAD') {
+                $this->cambioGrado = 'GRAD';
+            } elseif ($this->cambioGrado == 'GRAD') {
+                $this->cambioGrado = 'DEG';
+            }
+        }
+    }
 
         
         $pantalla = "0";
         $milan = new CalculadoraCientifica();
 
-        $cos = $milan->getCoseno();
-        $sen = $milan->getSeno();
-        $tan = $milan->getTan();
-        $tipo = $milan->getTipoGrado();
-
-        if(is_null($tipo)){
-            $tipo = "DEG";
-        }
 
         if(count($_POST) > 0){
             if(isset($_SESSION['cien'])){
@@ -834,29 +1069,30 @@
             if (isset($_POST['fact'])) $_SESSION['cien']->factorial();
 
             // Tema Grados
-            if(isset($_POST['sin'])) $_SESSION['cien']->seno(0);  
-            if(isset($_POST['cos'])) $_SESSION['cien']->coseno(0);  
-            if(isset($_POST['tan'])) $_SESSION['cien']->tangente(0);  
+            if(isset($_POST['sin'])) $_SESSION['cien']->seno();  
+            if(isset($_POST['cos'])) $_SESSION['cien']->coseno();  
+            if(isset($_POST['tan'])) $_SESSION['cien']->tangente();  
 
-            if(isset($_POST['asin'])) $_SESSION['cien']->seno(1);  
-            if(isset($_POST['acos']))$_SESSION['cien']->coseno(1);  
-            if(isset($_POST['atan'])) $_SESSION['cien']->tangente(1);  
+            if(isset($_POST['asin'])) $_SESSION['cien']->asin();  
+            if(isset($_POST['acos']))$_SESSION['cien']->acos();  
+            if(isset($_POST['atan'])) $_SESSION['cien']->atan();  
 
-            if(isset($_POST['sinh']))$_SESSION['cien']->seno(2);  
-            if(isset($_POST['cosh']))$_SESSION['cien']->coseno(2);  
-            if(isset($_POST['tanh'])) $_SESSION['cien']->tangente(2);  
+            if(isset($_POST['sinh']))$_SESSION['cien']->sinh();  
+            if(isset($_POST['cosh']))$_SESSION['cien']->cosh();  
+            if(isset($_POST['tanh'])) $_SESSION['cien']->tanh();  
 
-            if(isset($_POST['asinh'])) $_SESSION['cien']->seno(3);  
-            if(isset($_POST['acosh'])) $_SESSION['cien']->coseno(3);  
-            if(isset($_POST['atanh'])) $_SESSION['cien']->tangente(3); 
+            if(isset($_POST['asinh'])) $_SESSION['cien']->asinh();  
+            if(isset($_POST['acosh'])) $_SESSION['cien']->acosh();  
+            if(isset($_POST['atanh'])) $_SESSION['cien']->atanh();  
 
             // Cambio de grados
-            if(isset($_POST['RAD'])) $_SESSION['cien']->changeGrados("RAD"); 
-            if(isset($_POST['DEG'])) $_SESSION['cien']->changeGrados("DEG"); 
-            if(isset($_POST['GRAD'])) $_SESSION['cien']->changeGrados("GRAD"); 
+            if(isset($_POST['deg'])) 
+                $_SESSION['cien']->cambioDEG(); 
 
             // Cambio flecha
             if(isset($_POST['flecha'])) $_SESSION['cien']->shift(); 
+            if(isset($_POST['hyp'])) $_SESSION['cien']->chageHyp(); 
+            if(isset($_POST['notacion'])) $_SESSION['cien']->notacionC(); 
 
             // Parentesis
             if(isset($_POST['abrir'])) $_SESSION['cien']->abrirParentesis(); 
@@ -867,17 +1103,27 @@
             if (isset($_POST['punto'])) $_SESSION['cien']->punto();
             if (isset($_POST['igual'])) $_SESSION['cien']->igual();
             $pantalla = $_SESSION['cien']->getPantalla();
-        }
+            $tipo = $_SESSION['cien']->cambioGrado;
+            $cos = $_SESSION['cien']->seno;
+            $sen = $_SESSION['cien']->coseno;
+            $tan = $_SESSION['cien']->tangente;
+    } else {
+        $pantalla = $milan->getPantalla();
+        $tipo = $milan->cambioGrado;
+        $cos  = $milan->coseno;
+        $sen  = $milan->seno;
+        $tan  = $milan->tangente;
+    }
 
+        
 
-        echo "<script>console.log( 'Debug Objects: " . $tipo . "' );</script>"; 
-
+        
 
         echo "
             <form action = '#' method='post' name='calculadora'>
             <label for = 'pantalla'>Calculadora Milan by Nata</label>
             <input type='text'    name='pantalla' value='$pantalla' id='pantalla' readonly />
-            <input type='submit'  value='$tipo'   name='$tipo'/>
+            <input type='submit'  value='$tipo'   name='deg'/>
             <input type='submit'  value='HYP' name='hyp'/>
             <input type='submit'  value='F-E' name='notacion'/>
             <input type='submit'  value='MC' name='limpiarMem'/>
@@ -905,7 +1151,7 @@
             <input type='submit'  value='8'  name='ocho' />
             <input type='submit'  value='9'   name='nueve'/>
             <input type='submit'  value='x'   name='mul'/>
-            <input type='submit'  value='!n'   name='fact'/>
+            <input type='submit'  value='!n'   name='fact'/> 
             <input type='submit'  value='4'   name='cuatro'/>
             <input type='submit'  value='5' name='cinco'  />
             <input type='submit'  value='6'  name='seis' />
