@@ -1,0 +1,4 @@
+"""dni"",""nombre"",""apellidos"",""email"",""telefono"",""edad"",""sexo"",""nivelInformatico"",""tareaCompletada"",""tSec"",""comentarios"",""propuestas"",""valoracion"""
+"123,jose,gutierrez,JOSE@UNIOVI.ES,31231,M,7,0,No,180,""no ha completado"",""una guía"",4"
+232131,Ana,Fernandez,ana@uniovi.es,344345424,F,1,8,Si,78,hola,nada,10
+"4242352,Sergio,Murillo,sergio@uniovi.es,3163186,F,2,10,Si,69,hola,""muy buena página"",7"
