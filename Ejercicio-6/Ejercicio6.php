@@ -401,7 +401,7 @@
                     <li><a href="#cBase">Crear Base de datos</a></li>
                     <li><a href="#cTabla">Crear Tabla</a></li>
                     <li><a href="#insertar">Insertar Datos</a></li>
-                    <li><a href="#buscar">Buscar Datos</a></li>
+                    <li><a href="#find">Buscar Datos</a></li>
                     <li><a href="#modificar">Modificar BBDD</a></li>
                     <li><a href="#eliminar">Eliminar BBDD</a></li>
                     <li><a href="#informe">Generar informe</a></li>
@@ -412,6 +412,7 @@
         </header>
 
         <section id = "cBase">
+            <h2>Crear Base De Datos</h2>
             <form method="POST">
                 <label for = "crear">Crear base de datos</label>
                 <input type="submit" name="crearBase" value="Crear" id="crear" />
@@ -421,6 +422,7 @@
 
         <section id = "cTabla">
             <form method="POST">
+                <h2>Crear Tabla</h2>
                 <label for = "tabla">Crear Tabla</label>
                 <input type="submit" name="crearTabla" value="Crear Tabla" id="tabla" />
             </form>
@@ -476,7 +478,7 @@
             <p><?php echo "$insertado" ;?></p>
         </section>
 
-        <section id = "buscar">
+        <section id = "find">
             <h3>Buscar datos en la tabla</h3>
             <form method="POST">
                 <label for="buscar">Dni a buscar</label>
@@ -487,7 +489,7 @@
         </section>
 
         <section id = "modificar">
-            <h3>Modificar Datos de la BBDD</h3>
+            <h2>Modificar Datos de la BBDD</h2>
             <p>Hay que indicar el usuario a traves del DNI, por lo que es un campo obligatorio</p>
             <form method="POST">
                 <label for = "dniM">DNI</label>
@@ -536,7 +538,7 @@
         </section>
 
         <section id = "eliminar">
-            <h3>Eliminar de la BBDD</h3>
+            <h2>Eliminar de la BBDD</h2>
             <form method="POST">
                 <label for="buscar">Dni a eliminar</label>
                 <input type="text" id="buscar" name="eliminaDni" />
@@ -546,7 +548,7 @@
 
         </section>
         <section id = "informe">
-            <h3>Generar Informe</h3>
+            <h2>Generar Informe</h2>
             <form method="POST">
                 <input type="submit" name="informe" value="Generar Informe" />
             </form>
@@ -566,7 +568,7 @@
             <p><?php echo "$importacion" ;?></p>
         </section>
         <section id = "exportar">
-            <h3>Exportar de la BBDD</h3>
+            <h2>Exportar de la BBDD</h2>
             <form method="POST">
                 
                 <input type="submit" name="exportarData" value="Exportar" />
