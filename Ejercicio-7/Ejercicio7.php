@@ -29,7 +29,6 @@
             $this->username = "DBUSER2022";
             $this->password = "DBPSWD2022";
             $this->torneo = $torneo;
-            echo "<script>console.log( 'Debug Objects: " . $this->torneo . "' );</script>"; 
         }
 
 
@@ -44,7 +43,8 @@
         }
 
         public function getTorneos(){
-            $cad = "<select name='select' title = 'torneo'>";
+            $cad = "<label for='seleccion'>Seleccione el toreno a visualizar</label>";
+            $cad .= "<select name='select' title = 'torneo' id = 'seleccion'>";
 
             $this->conexion();
             $this->db->select_db('ejercicio-7');
@@ -68,8 +68,6 @@
 
             $this->conexion();
             $this->db->select_db('ejercicio-7');
-
-            echo "<script>console.log( 'Debug Objects: " . $this->torneo . "' );</script>"; 
 
             $query = "SELECT equipo.nombreEquipo, equipo.puntos FROM equipo, torneo 
                         where equipo.nombreTorneo = torneo.nombreTorneo and torneo.nombreTorneo = ? GROUP BY equipo.nombreEquipo, equipo.puntos ORDER by equipo.puntos DESC;";

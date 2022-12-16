@@ -88,7 +88,7 @@
 
             }
 
-            public function insertarDatos($dni, $nombre, $apellido, $mail, $tel, $sexo, $edad, $nivel, $tiempo, $realizado, $comentarios, $propuestas, $valoracion){
+            public function insertarDatos($dni, $nombre, $apellido, $mail, $tel, $edad, $sexo, $nivel, $tiempo, $realizado, $comentarios, $propuestas, $valoracion){
 
                 if($this->buscar($dni) != ''){
                     return "ya existe un usuario con el mismo DNI";
@@ -405,7 +405,7 @@
                     <li><a href="#modificar">Modificar BBDD</a></li>
                     <li><a href="#eliminar">Eliminar BBDD</a></li>
                     <li><a href="#informe">Generar informe</a></li>
-                    <li><a href="#cargar">Cargar datos a la BBDD</a></li>
+                    <li><a href="#load">Cargar datos a la BBDD</a></li>
                     <li><a href="#exportar">Exportar datos a la BBDD</a></li>
                 </ul>
             </nav>
@@ -443,7 +443,7 @@
                 <input type="text" name="Idni" id="dniI" />
 
                 <label for = "emailI">Correo Electronico</label>
-                <input type="text" name="Iemail" id="eamilI" />
+                <input type="text" name="Iemail" id="emailI" />
 
                 <label for = "telI">Telefono</label>
                 <input type="text" name="Itel" id="telI" />
@@ -460,7 +460,7 @@
                 <label for = "tmpI">Tiempo medio prueba (segundos)</label>
                 <input type="text" name="Itmp" id="tmpI" />
 
-                <label for = "tareaI">¿Se completo la tarea? (0->No, 1->Sí)</label>
+                <label for = "tareaI">¿Se completo la tarea? (No, Si)</label>
                 <input type="text" name="Itarea" id="tareaI" />
 
                 <label for = "comI">Comentarios</label>
@@ -479,7 +479,7 @@
         </section>
 
         <section id = "find">
-            <h3>Buscar datos en la tabla</h3>
+            <h2>Buscar datos en la tabla</h2>
             <form method="POST">
                 <label for="buscar">Dni a buscar</label>
                 <input type="text" id="buscar" name="buscarDni" />
@@ -493,7 +493,7 @@
             <p>Hay que indicar el usuario a traves del DNI, por lo que es un campo obligatorio</p>
             <form method="POST">
                 <label for = "dniM">DNI</label>
-                <input type="text" name="Mdni" id="dniIM" />
+                <input type="text" name="Mdni" id="dniM" />
 
                 <label for = "nombreM">Nombre</label>
                 <input type="text" name="Mnombre" id="nombreM" />
@@ -502,7 +502,7 @@
                 <input type="text" name="Mapellido" id="apellidoM" />
 
                 <label for = "emailM">Correo Electronico</label>
-                <input type="text" name="Memail" id="eamilM" />
+                <input type="text" name="Memail" id="emailM" />
 
                 <label for = "telM">Telefono</label>
                 <input type="text" name="Mtel" id="telM" />
@@ -519,7 +519,7 @@
                 <label for = "tmpM">Tiempo medio prueba (segundos)</label>
                 <input type="text" name="Mtmp" id="tmpM" />
 
-                <label for = "tareaM">¿Se completo la tarea? (0->No, 1->Sí)</label>
+                <label for = "tareaM">¿Se completo la tarea? (No, Si)</label>
                 <input type="text" name="Mtarea" id="tareaM" />
 
                 <label for = "comM">Comentarios</label>
@@ -540,9 +540,9 @@
         <section id = "eliminar">
             <h2>Eliminar de la BBDD</h2>
             <form method="POST">
-                <label for="buscar">Dni a eliminar</label>
-                <input type="text" id="buscar" name="eliminaDni" />
-                <input type="submit" name="eliminarData" value="Buscar" />
+                <label for="buscarEliminar">Dni del usuario eliminar</label>
+                <input type="text" id="buscarEliminar" name="eliminaDni" />
+                <input type="submit" name="eliminarData" value="Eliminar" />
             </form>
             <p><?php echo "$eliminar" ;?></p> 
 
@@ -554,7 +554,7 @@
             </form>
             <p><?php echo "$informe" ;?></p>
         </section>
-        <section id = "cargar">
+        <section id = "load">
             <h2>Cargar datos de un CSV</h2>
             <?php
                 echo "

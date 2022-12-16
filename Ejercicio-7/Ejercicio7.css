@@ -14,7 +14,7 @@ body{
 }
 
 /*(0,0,1)*/
-h1, h2, h3{
+h1, h2{
     /*El color de la letra lo hereda de body*/
     background-color: #4DD2FF;
 }
